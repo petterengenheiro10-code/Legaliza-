@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Legaliza+ | Assessoria & Despachante</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --black:   #0a0a0a;
+      --dark:    #111111;
+      --card:    #161616;
+      --border:  #2a2a2a;
+      --gold:    #c9a84c;
+      --gold-lt: #f0c84a;
+      --gold-dk: #9a7930;
+      --green:   #22c55e;
+      --white:   #f5f0e8;
+      --muted:   #888;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+```
+/* NOISE */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9998;
+  opacity: .4;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: rgba(10,10,10,.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(201,168,76,.2);
+  padding: 0 5vw;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.7rem;
+  letter-spacing: .08em;
+  color: var(--gold);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+.nav-logo span { color: var(--white); }
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+.nav-links a {
+  font-family: 'Oswald', sans-serif;
+  font-size: .9rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,.6);
+  text-decoration: none;
+  transition: color .2s;
+}
+.nav-links a:hover { color: var(--gold); }
+.nav-cta {
+  background: var(--gold);
+  color: var(--black);
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: .85rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: .55rem 1.4rem;
+  text-decoration: none;
+  transition: background .2s;
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+}
+.nav-cta:hover { background: var(--gold-lt); }
+
+/* HAMBURGER */
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+.hamburger span { display: block; width: 24px; height: 2px; background: var(--gold); transition: .3s; }
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+@media (max-width: 768px) {
+  .nav-links, .nav-cta { display: none; }
+  .hamburger { display: flex; }
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 68px; left: 0; right: 0;
+    background: rgba(10,10,10,.98);
+    border-bottom: 1px solid rgba(201,168,76,.2);
+    padding: 2rem 5vw;
+    flex-direction: column;
+    gap: 1.5rem;
+    z-index: 999;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--white);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(201,168,76,.15);
+    padding-bottom: 1rem;
+  }
+  .mobile-menu a:last-child { border-bottom: none; }
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 8rem 5vw 5rem;
+  position: relative;
+  overflow: hidden;
+  background: var(--dark);
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 60% 40%, rgba(201,168,76,.08) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 40% at 10% 80%, rgba(201,168,76,.04) 0%, transparent 60%);
+}
+/* Diagonal grid lines */
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(-60deg, transparent, transparent 60px, rgba(201,168,76,.025) 60px, rgba(201,168,76,.025) 61px);
+}
+
+.hero-eyebrow {
+  font-family: 'Oswald', sans-serif;
+  font-size: .8rem;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  animation: fadeUp .6s ease both;
+}
+.hero-eyebrow::before { content: ''; display: block; width: 40px; height: 1px; background: var(--gold); }
+
+.hero-wolf {
+  font-size: clamp(4rem, 10vw, 7rem);
+  line-height: 1;
+  margin-bottom: .5rem;
+  animation: fadeUp .6s .05s ease both, wolfFloat 4s ease-in-out infinite;
+  display: block;
+  width: fit-content;
+}
+@keyframes wolfFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(4.5rem, 13vw, 11rem);
+  line-height: .9;
+  letter-spacing: .03em;
+  animation: fadeUp .7s .1s ease both;
+}
+.hero-title .gold { color: var(--gold); }
+.hero-title .outline { color: transparent; -webkit-text-stroke: 2px rgba(245,240,232,.25); }
+
+.hero-slogan {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  font-weight: 400;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 1rem 0 2.5rem;
+  animation: fadeUp .7s .2s ease both;
+}
+.hero-slogan em { color: var(--gold); font-style: normal; }
+
+.hero-btns {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  animation: fadeUp .7s .3s ease both;
+}
+.btn-gold {
+  background: linear-gradient(135deg, var(--gold), var(--gold-lt));
+  color: var(--black);
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: .9rem 2.2rem;
+  text-decoration: none;
+  display: inline-block;
+  transition: transform .2s, box-shadow .2s;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+}
+.btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,.4); }
+.btn-ghost {
+  background: transparent;
+  color: var(--gold);
+  font-family: 'Oswald', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: .9rem 2.2rem;
+  text-decoration: none;
+  display: inline-block;
+  border: 1px solid rgba(201,168,76,.4);
+  transition: border-color .2s, background .2s;
+}
+.btn-ghost:hover { border-color: var(--gold); background: rgba(201,168,76,.08); }
+
+/* HERO BADGE */
+.hero-badge {
+  position: absolute;
+  right: 5vw;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  animation: fadeLeft .8s .4s ease both;
+}
+.badge-item {
+  text-align: right;
+  border-right: 2px solid var(--gold);
+  padding-right: 1.2rem;
+}
+.badge-num { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; color: var(--gold); line-height: 1; }
+.badge-lbl { font-family: 'Oswald', sans-serif; font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+
+@media (max-width: 900px) { .hero-badge { display: none; } }
+
+/* ── STATUS BAR ── */
+.status-bar {
+  background: rgba(34,197,94,.1);
+  border-top: 1px solid rgba(34,197,94,.2);
+  border-bottom: 1px solid rgba(34,197,94,.2);
+  padding: .9rem 5vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.status-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-family: 'Oswald', sans-serif;
+  font-size: .85rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--green);
+}
+.pulse-dot {
+  width: 10px; height: 10px;
+  background: var(--green);
+  border-radius: 50%;
+  animation: pulse 1.5s ease-in-out infinite;
+  flex-shrink: 0;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(34,197,94,.4); }
+  50% { opacity: .7; box-shadow: 0 0 0 6px rgba(34,197,94,0); }
+}
+.status-phone {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--white);
+  text-decoration: none;
+  letter-spacing: .08em;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  transition: color .2s;
+}
+.status-phone:hover { color: var(--gold); }
+
+/* ── SECTION BASE ── */
+section { padding: 6rem 5vw; }
+.section-eyebrow {
+  font-family: 'Oswald', sans-serif;
+  font-size: .75rem;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: .8rem;
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+}
+.section-eyebrow::before { content: ''; display: block; width: 30px; height: 1px; background: var(--gold); }
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  line-height: 1;
+  letter-spacing: .03em;
+}
+.section-title .gold { color: var(--gold); }
+
+/* ── MISSÃO ── */
+.mission-section {
+  background: var(--dark);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.mission-section::before {
+  content: 'MISSÃO';
+  position: absolute;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(6rem, 18vw, 16rem);
+  color: rgba(201,168,76,.04);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  white-space: nowrap;
+}
+.mission-quote {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2rem, 5vw, 4rem);
+  color: var(--gold);
+  line-height: 1.1;
+  max-width: 800px;
+  margin: 2rem auto;
+  letter-spacing: .03em;
+}
+.mission-sub {
+  font-size: 1.05rem;
+  color: rgba(245,240,232,.6);
+  max-width: 560px;
+  margin: 0 auto 2.5rem;
+}
+.gold-line { width: 60px; height: 2px; background: linear-gradient(90deg, var(--gold), var(--gold-lt)); margin: 0 auto 2rem; }
+
+/* ── SERVIÇOS ── */
+.services-section { background: var(--black); }
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5px;
+  margin-top: 3.5rem;
+  border: 1.5px solid rgba(201,168,76,.15);
+}
+.service-card {
+  background: var(--card);
+  padding: 2.5rem 2rem;
+  position: relative;
+  overflow: hidden;
+  transition: background .3s;
+  border: 1px solid rgba(201,168,76,.08);
+}
+.service-card:hover { background: #1a1a1a; }
+.service-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-lt));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .35s ease;
+}
+.service-card:hover::after { transform: scaleX(1); }
+.service-icon { font-size: 2.5rem; margin-bottom: 1.2rem; display: block; }
+.service-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.2rem;
+  padding-bottom: .8rem;
+  border-bottom: 1px solid rgba(201,168,76,.2);
+}
+.service-list { list-style: none; }
+.service-list li {
+  padding: .45rem 0;
+  font-size: .9rem;
+  color: rgba(245,240,232,.7);
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  border-bottom: 1px solid rgba(255,255,255,.04);
+}
+.service-list li::before { content: '◆'; color: var(--gold); font-size: .5rem; flex-shrink: 0; }
+.service-btn {
+  display: inline-block;
+  margin-top: 1.5rem;
+  background: rgba(201,168,76,.1);
+  border: 1px solid rgba(201,168,76,.3);
+  color: var(--gold);
+  font-family: 'Oswald', sans-serif;
+  font-weight: 600;
+  font-size: .85rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: .6rem 1.4rem;
+  text-decoration: none;
+  transition: background .2s, color .2s;
+}
+.service-btn:hover { background: var(--gold); color: var(--black); }
+
+/* ── CTA MULTA ── */
+.multa-section {
+  background: var(--dark);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+@media (max-width: 768px) { .multa-section { grid-template-columns: 1fr; gap: 3rem; } }
+.multa-vehicles {
+  display: flex;
+  gap: 1.5rem;
+  margin: 2rem 0;
+  flex-wrap: wrap;
+}
+.vehicle-btn {
+  background: var(--card);
+  border: 1px solid rgba(201,168,76,.2);
+  color: var(--white);
+  font-family: 'Oswald', sans-serif;
+  font-size: .9rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: .7rem 1.4rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  transition: border-color .2s, background .2s, color .2s;
+}
+.vehicle-btn:hover, .vehicle-btn.active {
+  border-color: var(--gold);
+  background: rgba(201,168,76,.1);
+  color: var(--gold);
+}
+.multa-checklist { list-style: none; margin-top: 1.5rem; }
+.multa-checklist li {
+  padding: .7rem 0;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  font-size: .95rem;
+  color: rgba(245,240,232,.75);
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+}
+.check-ico { color: var(--green); font-size: 1rem; flex-shrink: 0; }
+.multa-highlight {
+  background: linear-gradient(135deg, rgba(201,168,76,.12), transparent);
+  border-left: 3px solid var(--gold);
+  padding: 1.2rem 1.5rem;
+  margin-top: 2rem;
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.1rem;
+  color: var(--gold-lt);
+  letter-spacing: .04em;
+}
+
+/* Visual block */
+.multa-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.multa-big {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(6rem, 14vw, 11rem);
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(201,168,76,.25);
+  line-height: 1;
+  text-align: center;
+  position: relative;
+}
+.multa-big span {
+  display: block;
+  color: var(--gold);
+  -webkit-text-stroke: 0;
+  font-size: clamp(2rem, 4vw, 3rem);
+  letter-spacing: .1em;
+}
+
+/* ── DIFERENCIAIS ── */
+.diff-section { background: var(--black); }
+.diff-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 3.5rem;
+}
+.diff-card {
+  background: var(--card);
+  border: 1px solid rgba(201,168,76,.12);
+  padding: 2.5rem 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform .3s, box-shadow .3s;
+}
+.diff-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(201,168,76,.15);
+}
+.diff-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.diff-icon { font-size: 2.8rem; margin-bottom: 1.2rem; display: block; }
+.diff-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: .8rem;
+}
+.diff-text { font-size: .9rem; color: rgba(245,240,232,.6); line-height: 1.7; }
+
+/* ── CTA BAND ── */
+.cta-band {
+  background: linear-gradient(135deg, #0f0f0f 0%, #1a1500 50%, #0f0f0f 100%);
+  border-top: 1px solid rgba(201,168,76,.2);
+  border-bottom: 1px solid rgba(201,168,76,.2);
+  padding: 5rem 5vw;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-band::before {
+  content: 'LEGALIZA+';
+  position: absolute;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(6rem, 18vw, 14rem);
+  color: rgba(201,168,76,.05);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  white-space: nowrap;
+}
+.cta-band h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+.cta-band p {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.1rem;
+  color: rgba(245,240,232,.6);
+  margin-bottom: 2.5rem;
+  max-width: 480px;
+  margin-inline: auto;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--dark);
+  border-top: 2px solid var(--gold);
+  padding: 4rem 5vw 2rem;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 4rem;
+  margin-bottom: 3rem;
+}
+@media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+.footer-brand .logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  color: var(--gold);
+  letter-spacing: .06em;
+  margin-bottom: .3rem;
+}
+.footer-brand .tagline {
+  font-family: 'Oswald', sans-serif;
+  font-size: .8rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1rem;
+}
+.footer-brand .desc { font-size: .9rem; color: rgba(245,240,232,.5); line-height: 1.8; }
+.footer-motivational {
+  margin-top: 1.5rem;
+  padding: 1rem 1.2rem;
+  border-left: 3px solid var(--gold);
+  background: rgba(201,168,76,.05);
+  font-family: 'Oswald', sans-serif;
+  font-size: .95rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  color: var(--gold-lt);
+}
+.footer-col h4 {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: .8rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+}
+.footer-col ul { list-style: none; }
+.footer-col ul li {
+  padding: .45rem 0;
+  border-bottom: 1px solid rgba(255,255,255,.04);
+  font-size: .88rem;
+  color: rgba(245,240,232,.55);
+}
+.contact-row {
+  display: flex;
+  align-items: flex-start;
+  gap: .8rem;
+  margin-bottom: 1rem;
+}
+.contact-icon { color: var(--gold); font-size: 1.1rem; margin-top: 2px; flex-shrink: 0; }
+.contact-lbl { font-size: .72rem; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; display: block; }
+.contact-val {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1rem;
+  color: var(--white);
+  text-decoration: none;
+  transition: color .2s;
+}
+.contact-val:hover { color: var(--gold); }
+.wa-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  background: #25d366;
+  color: #fff;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 600;
+  font-size: .95rem;
+  letter-spacing: .06em;
+  text-decoration: none;
+  padding: .7rem 1.4rem;
+  border-radius: 2px;
+  margin-top: .5rem;
+  transition: background .2s;
+}
+.wa-btn:hover { background: #1aad52; }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,.07);
+  padding-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.footer-bottom p { font-size: .78rem; color: var(--muted); }
+.gold-badge {
+  background: rgba(201,168,76,.08);
+  border: 1px solid rgba(201,168,76,.2);
+  padding: .35rem .9rem;
+  font-family: 'Oswald', sans-serif;
+  font-size: .7rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* ── WHATSAPP FLOAT ── */
+.wa-float {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 9000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: .5rem;
+}
+.wa-float-bubble {
+  background: #25d366;
+  color: #fff;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 6px 25px rgba(37,211,102,.4);
+  transition: transform .2s, box-shadow .2s;
+  animation: waPulse 2.5s ease-in-out infinite;
+}
+.wa-float-bubble:hover {
+  transform: scale(1.1);
+  box-shadow: 0 10px 35px rgba(37,211,102,.6);
+}
+@keyframes waPulse {
+  0%, 100% { box-shadow: 0 6px 25px rgba(37,211,102,.4); }
+  50% { box-shadow: 0 6px 35px rgba(37,211,102,.7), 0 0 0 10px rgba(37,211,102,.08); }
+}
+.wa-float-label {
+  background: rgba(10,10,10,.85);
+  border: 1px solid rgba(37,211,102,.3);
+  color: #25d366;
+  font-family: 'Oswald', sans-serif;
+  font-size: .75rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: .3rem .8rem;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeLeft { from { opacity: 0; transform: translateX(24px); } to { opacity: 1; transform: translateX(0); } }
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity .65s ease, transform .65s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: .1s; }
+.reveal-delay-2 { transition-delay: .2s; }
+.reveal-delay-3 { transition-delay: .3s; }
+
+/* STRIPE */
+.stripe { height: 5px; background: linear-gradient(90deg, var(--gold-dk), var(--gold), var(--gold-lt), var(--gold), var(--gold-dk)); }
+```
+
+  </style>
+</head>
+<body>
+
+<!-- MOBILE MENU -->
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#servicos" onclick="closeMobile()">Serviços</a>
+  <a href="#multas" onclick="closeMobile()">Recurso de Multa</a>
+  <a href="#diferenciais" onclick="closeMobile()">Por que nós</a>
+  <a href="#contato" onclick="closeMobile()">Contato</a>
+  <a href="https://wa.me/5521974546516" target="_blank" rel="noopener" style="color:#25d366;">💬 Fale Comigo</a>
+</div>
+
+<!-- NAV -->
+
+<nav>
+  <a href="#" class="nav-logo">🐺 Legaliza<span>+</span></a>
+  <ul class="nav-links">
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#multas">Recurso de Multa</a></li>
+    <li><a href="#diferenciais">Por que nós</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+  <a href="https://wa.me/5521974546516" class="nav-cta" target="_blank" rel="noopener">Fale Comigo</a>
+  <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMobile()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+
+<header class="hero" id="inicio">
+  <div class="hero-bg"></div>
+  <div class="hero-eyebrow">Assessoria & Despachante Documentarista</div>
+  <span class="hero-wolf">🐺</span>
+  <h1 class="hero-title">
+    <span class="gold">Legaliza</span><span class="gold">+</span>
+    <br>
+    <span class="outline">Assessoria</span>
+  </h1>
+  <p class="hero-slogan">Seu direito, <em>nossa missão.</em></p>
+  <div class="hero-btns">
+    <a href="https://wa.me/5521974546516" class="btn-gold" target="_blank" rel="noopener">💬 Fale Comigo</a>
+    <a href="#servicos" class="btn-ghost">Ver Serviços</a>
+  </div>
+  <div class="hero-badge">
+    <div class="badge-item"><div class="badge-num">+500</div><div class="badge-lbl">Clientes Atendidos</div></div>
+    <div class="badge-item"><div class="badge-num">100%</div><div class="badge-lbl">Segurança Jurídica</div></div>
+    <div class="badge-item"><div class="badge-num">RJ</div><div class="badge-lbl">Credenciada DETRAN</div></div>
+  </div>
+</header>
+
+<!-- STATUS BAR -->
+
+<div class="status-bar">
+  <div class="status-left">
+    <div class="pulse-dot"></div>
+    Estamos ON — Atendimento disponível agora
+  </div>
+  <a href="tel:+5521974546516" class="status-phone">📞 (21) 97454-6516</a>
+</div>
+
+<!-- MISSÃO -->
+
+<section class="mission-section">
+  <div class="reveal">
+    <div class="section-eyebrow">Nossa Missão</div>
+    <div class="gold-line"></div>
+    <div class="mission-quote">"Trabalhe para ser o melhor, não o mais barato!"</div>
+    <p class="mission-sub">Somos especialistas em regularização de documentação veicular, habilitações especiais e recurso de multas. Atendemos motoristas e empresas com agilidade, ética e resultado.</p>
+    <a href="https://wa.me/5521974546516" class="btn-gold" target="_blank" rel="noopener">💬 Solicite Agora</a>
+  </div>
+</section>
+
+<div class="stripe"></div>
+
+<!-- SERVIÇOS -->
+
+<section class="services-section" id="servicos">
+  <div class="reveal">
+    <div class="section-eyebrow">O que fazemos</div>
+    <h2 class="section-title">Nossos <span class="gold">Serviços</span></h2>
+  </div>
+  <div class="services-grid">
+
+```
+<!-- Documentação -->
+<div class="service-card reveal">
+  <span class="service-icon">📄</span>
+  <div class="service-title">Documentação Veicular</div>
+  <ul class="service-list">
+    <li>Licenciamento Anual</li>
+    <li>IPVA e Multas</li>
+    <li>Transferência Veicular</li>
+    <li>Primeiro Emplacamento</li>
+    <li>Alterações Contratuais</li>
+    <li>2ª Via CRV / CRLV / CNH</li>
+    <li>Parcelamento de Débitos</li>
+    <li>Vistoria Cautelar</li>
+  </ul>
+  <a href="https://wa.me/5521974546516?text=Olá!%20Preciso%20de%20auxílio%20com%20documentação%20veicular." class="service-btn" target="_blank" rel="noopener">Solicitar →</a>
+</div>
+
+<!-- CNH -->
+<div class="service-card reveal reveal-delay-1">
+  <span class="service-icon">🪪</span>
+  <div class="service-title">Habilitação / CNH</div>
+  <ul class="service-list">
+    <li>Habilitação / Troca / Categoria</li>
+    <li>Consultas DETRAN</li>
+    <li>Suspensão de CNH</li>
+    <li>Cassação de CNH</li>
+    <li>Bloqueio de CNH</li>
+    <li>Renovação de CNH</li>
+    <li>Curso MOPP</li>
+    <li>Regularização de Pontos</li>
+  </ul>
+  <a href="https://wa.me/5521974546516?text=Olá!%20Preciso%20de%20auxílio%20com%20minha%20CNH." class="service-btn" target="_blank" rel="noopener">Solicitar →</a>
+</div>
+
+<!-- Multas -->
+<div class="service-card reveal reveal-delay-2">
+  <span class="service-icon">⚖️</span>
+  <div class="service-title">Recurso de Multas</div>
+  <ul class="service-list">
+    <li>Multas Leves / Médias</li>
+    <li>Multas Graves / Gravíssimas</li>
+    <li>Lei Seca</li>
+    <li>Infração Mandatória</li>
+    <li>Defesa Prévia</li>
+    <li>1ª Instância (JARI)</li>
+    <li>2ª Instância (CETRAN)</li>
+    <li>Cancelamento de Autuação</li>
+  </ul>
+  <a href="https://wa.me/5521974546516?text=Olá!%20Preciso%20recorrer%20de%20uma%20multa." class="service-btn" target="_blank" rel="noopener">Solicitar →</a>
+</div>
+```
+
+  </div>
+</section>
+
+<!-- CTA MULTA -->
+
+<section class="multa-section" id="multas">
+  <div class="reveal">
+    <div class="section-eyebrow">Recurso de Multa</div>
+    <h2 class="section-title">Recorra da<br>sua <span class="gold">Multa</span></h2>
+    <p style="color:rgba(245,240,232,.6); margin: 1rem 0; font-size:.97rem;">Atendemos todos os tipos de veículos. Selecione o seu e fale com a Mara agora:</p>
+    <div class="multa-vehicles">
+      <a href="https://wa.me/5521974546516?text=Olá!%20Tenho%20uma%20multa%20no%20meu%20Carro%20e%20preciso%20recorrer." class="vehicle-btn" target="_blank" rel="noopener">🚗 Carro</a>
+      <a href="https://wa.me/5521974546516?text=Olá!%20Tenho%20uma%20multa%20na%20minha%20Moto%20e%20preciso%20recorrer." class="vehicle-btn" target="_blank" rel="noopener">🏍️ Moto</a>
+      <a href="https://wa.me/5521974546516?text=Olá!%20Tenho%20uma%20multa%20no%20meu%20Caminhão%20e%20preciso%20recorrer." class="vehicle-btn" target="_blank" rel="noopener">🚛 Caminhão</a>
+    </div>
+    <ul class="multa-checklist">
+      <li><span class="check-ico">✔</span> Análise gratuita da sua infração</li>
+      <li><span class="check-ico">✔</span> Recursos para todas as instâncias</li>
+      <li><span class="check-ico">✔</span> Atendimento rápido e sigiloso</li>
+      <li><span class="check-ico">✔</span> Experiência em Lei Seca e mandatórias</li>
+      <li><span class="check-ico">✔</span> Defesa técnica especializada</li>
+    </ul>
+    <div class="multa-highlight">Não pague antes de recorrer. Consulte a Mara!</div>
+    <a href="https://wa.me/5521974546516?text=Olá%20Mara!%20Quero%20recorrer%20de%20uma%20multa." class="btn-gold" style="margin-top:2rem;" target="_blank" rel="noopener">💬 Fale Comigo Agora</a>
+  </div>
+  <div class="multa-visual reveal reveal-delay-1">
+    <div class="multa-big">
+      MULTA<br>
+      <span>Recorra!</span>
+      NÃO<br>PAGUE
+    </div>
+  </div>
+</section>
+
+<div class="stripe"></div>
+
+<!-- DIFERENCIAIS -->
+
+<section class="diff-section" id="diferenciais">
+  <div class="reveal">
+    <div class="section-eyebrow">Por que nos escolher</div>
+    <h2 class="section-title">Nossos <span class="gold">Diferenciais</span></h2>
+  </div>
+  <div class="diff-grid">
+    <div class="diff-card reveal">
+      <span class="diff-icon">🏆</span>
+      <div class="diff-title">Experiência Comprovada</div>
+      <p class="diff-text">Anos de atuação no mercado com centenas de clientes satisfeitos. Conhecemos cada detalhe da legislação de trânsito brasileira.</p>
+    </div>
+    <div class="diff-card reveal reveal-delay-1">
+      <span class="diff-icon">🎯</span>
+      <div class="diff-title">Resultado com Precisão</div>
+      <p class="diff-text">Trabalhamos com foco total no seu caso. Cada recurso e processo é tratado individualmente para maximizar as chances de êxito.</p>
+    </div>
+    <div class="diff-card reveal reveal-delay-2">
+      <span class="diff-icon">⚡</span>
+      <div class="diff-title">Agilidade no Atendimento</div>
+      <p class="diff-text">Atendimento direto com a Mara Batista via WhatsApp. Sem burocracia, sem espera — respostas rápidas e soluções eficientes.</p>
+    </div>
+    <div class="diff-card reveal">
+      <span class="diff-icon">🔒</span>
+      <div class="diff-title">Segurança Jurídica</div>
+      <p class="diff-text">Toda documentação tratada com sigilo absoluto. Você pode confiar: seus dados e processos estão em mãos profissionais.</p>
+    </div>
+    <div class="diff-card reveal reveal-delay-1">
+      <span class="diff-icon">💰</span>
+      <div class="diff-title">Custo-Benefício Real</div>
+      <p class="diff-text">Investir em um recurso profissional pode economizar muito mais do que o valor da multa. Faça as contas com a nossa ajuda.</p>
+    </div>
+    <div class="diff-card reveal reveal-delay-2">
+      <span class="diff-icon">📍</span>
+      <div class="diff-title">Atendimento no RJ</div>
+      <p class="diff-text">Credenciada junto ao DETRAN-RJ, com atuação em todo o estado do Rio de Janeiro. Presença local, resultado garantido.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+
+<div class="cta-band" id="contato">
+  <div class="reveal">
+    <h2>Pronto para <span style="color:var(--gold);">Regularizar?</span></h2>
+    <p>Fale agora com a Mara Batista e resolva sua situação com rapidez e segurança.</p>
+    <a href="https://wa.me/5521974546516?text=Olá%20Mara!%20Gostaria%20de%20uma%20consultoria." class="btn-gold" target="_blank" rel="noopener">💬 Solicite Agora</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo">🐺 Legaliza+</div>
+      <div class="tagline">Assessoria & Despachante Documentarista</div>
+      <p class="desc">Especialistas em regularização de documentação veicular, habilitações especiais, recurso de multas e assessoria completa para motoristas e empresas. Trabalhamos para que você esteja sempre em dia com a legislação.</p>
+      <div class="footer-motivational">"Trabalhe para ser o melhor, não o mais barato!"</div>
+    </div>
+    <div class="footer-col">
+      <h4>Serviços</h4>
+      <ul>
+        <li>Documentação Veicular</li>
+        <li>Licenciamento e IPVA</li>
+        <li>Transferência de Veículo</li>
+        <li>Habilitação / CNH</li>
+        <li>Curso MOPP</li>
+        <li>Recurso de Multas</li>
+        <li>Defesa Prévia</li>
+        <li>Consultoria em Trânsito</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Fale Conosco</h4>
+      <div class="contact-row">
+        <span class="contact-icon">👤</span>
+        <div>
+          <span class="contact-lbl">Responsável</span>
+          <span class="contact-val">Mara Batista</span>
+        </div>
+      </div>
+      <div class="contact-row">
+        <span class="contact-icon">📞</span>
+        <div>
+          <span class="contact-lbl">Telefone / WhatsApp</span>
+          <a href="tel:+5521974546516" class="contact-val">(21) 97454-6516</a>
+        </div>
+      </div>
+      <a href="https://wa.me/5521974546516?text=Olá%20Mara!%20Vim%20pelo%20site%20e%20gostaria%20de%20mais%20informações." class="wa-btn" target="_blank" rel="noopener">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Chamar no WhatsApp
+      </a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Legaliza+ · Mara Batista — Despachante Documentarista · Todos os direitos reservados</p>
+    <div class="gold-badge">Credenciada · DETRAN-RJ</div>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLUTUANTE -->
+
+<div class="wa-float">
+  <span class="wa-float-label">Fale Comigo</span>
+  <a href="https://wa.me/5521974546516?text=Olá%20Mara!%20Vim%20pelo%20site%20e%20gostaria%20de%20atendimento." class="wa-float-bubble" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+</div>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Mobile menu
+  function toggleMobile() {
+    const menu = document.getElementById('mobileMenu');
+    const btn = document.getElementById('hamburger');
+    menu.classList.toggle('open');
+    btn.classList.toggle('open');
+  }
+  function closeMobile() {
+    document.getElementById('mobileMenu').classList.remove('open');
+    document.getElementById('hamburger').classList.remove('open');
+  }
+
+  // Nav scroll effect
+  window.addEventListener('scroll', () => {
+    document.querySelector('nav').style.boxShadow =
+      window.scrollY > 40 ? '0 4px 30px rgba(0,0,0,.6)' : 'none';
+  });
+</script>
+
+</body>
+</html>
